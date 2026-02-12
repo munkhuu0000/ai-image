@@ -1,3 +1,5 @@
+"use client";
+
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
@@ -17,19 +19,17 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  about: z
-    .string()
-    .min(10, "Please provide at least 10 characters.")
-    .max(200, "Please keep it under 200 characters."),
+  image: z.string(),
 });
 
 export const ImageAnalysis = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      about: "",
+      image: "",
     },
   });
+
   function onSubmit(data: z.infer<typeof formSchema>) {}
   return (
     <div className="flex flex-col justtify-center items-start gap-4 text-[#09090B] ">
@@ -49,6 +49,34 @@ export const ImageAnalysis = () => {
       </div>
       <div>
         <p>Upload a food photo, and AI will detect the ingredients. </p>
+        <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <Controller
+              name="image"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-input-username">
+                    Imgae
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-rhf-input-username"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="Upload your food image here"
+                    autoComplete="username"
+                  />
+                  <FieldDescription>
+                    Upload a food photo, and AI will detect the ingredients.
+                  </FieldDescription>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+          </FieldGroup>
+        </form>
       </div>
     </div>
   );
