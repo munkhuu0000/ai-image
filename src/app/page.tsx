@@ -119,17 +119,17 @@ export default function Home() {
       <main className="flex justify-center px-6 py-8">
         <div className="w-full  max-w-xl">
           <Tabs defaultValue="image-analysis" className="w-full">
-            <TabsList className="mb-6 grid w-full max-w-md mx-auto grid-cols-3 gap-3">
-              <TabsTrigger value="image-analysis" className="mx-3">
+            <TabsList className="mb-6 grid w-fit grid-cols-3 rounded-md bg-muted p-1">
+              <TabsTrigger className="rounded-full px-4" value="image-analysis">
                 Image analysis
               </TabsTrigger>
               <TabsTrigger
+                className="rounded-full px-4"
                 value="ingredient-recognition"
-                className="mx-3 w-fit"
               >
                 Ingredient recognition
               </TabsTrigger>
-              <TabsTrigger value="image-creator" className="mx-3 w-fit">
+              <TabsTrigger className="rounded-full px-4" value="image-creator">
                 Image creator
               </TabsTrigger>
             </TabsList>
